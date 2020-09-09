@@ -10,7 +10,7 @@
     "compile-scss": "sass static/scss/custom.scss static/css/custom.css"
   },
   "devDependencies": {
-    "docusaurus": "1.0.15"
+    "docusaurus": "1.14.6"
   },
   "dependencies": {
     "react-router-dom": "^4.3.1",
