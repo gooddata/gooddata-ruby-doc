@@ -14,6 +14,7 @@ The SDK is tested against the following Ruby versions:
 - 2.3
 - 2.4
 - 2.5
+- 2.6
 - jruby-1.7.19
 - jruby-9.1.5
 - jruby-9.1.7
