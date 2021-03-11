@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Working with Data Sources · Ruby SDK</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Creating a Data Source"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Working with Data Sources · Ruby SDK"/><meta property="og:type" content="website"/><meta property="og:url" content="https://gooddata.github.io/gooddata-ruby-doc/"/><meta property="og:description" content="Creating a Data Source"/><meta property="og:image" content="https://gooddata.github.io/gooddata-ruby-doc/img/docusaurus.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://gooddata.github.io/gooddata-ruby-doc/img/docusaurus.png"/><link rel="shortcut icon" href="/gooddata-ruby-doc/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/gooddata-ruby-doc/js/scrollSpy.js"></script><link rel="stylesheet" href="/gooddata-ruby-doc/css/main.css"/><script src="/gooddata-ruby-doc/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/gooddata-ruby-doc/"><img class="logo" src="/gooddata-ruby-doc/img/gooddata-ruby.svg" alt="Ruby SDK"/><h2 class="headerTitleWithLogo">Ruby SDK</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/gooddata-ruby-doc/docs/getting_started" target="_self">Docs</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Advanced Guides</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Basics</h3><ul class=""><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/getting_started">Getting started</a></li><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/jack_in">Interactive Ruby Console</a></li><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/create_a_program">Scripting</a></li><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/connecting_to_gooddata">Connecting to Gooddata Platform</a></li><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/handling_credentials">Handling Credentials Securely</a></li><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/using_gooddata_platform">Using GoodData Platform</a></li><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/command_line">Command line functionality</a></li><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/logging">Logging and Testing</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Advanced Guides</h3><ul class=""><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/working_with_projects">Working with Projects</a></li><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/working_with_users">Working with Users</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/gooddata-ruby-doc/docs/working_with_data_sources">Working with Data Sources</a></li><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/working_with_permissions">Setting Permissions</a></li><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/working_with_models">Model Setup</a></li><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/working_with_your_data">Working with Your Data</a></li><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/working_with_reports">Working with Reports</a></li><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/working_with_dashboards">Using Dashboards</a></li><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/working_with_deployments">Deployment How-tos</a></li><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/working_with_automation">Automation and Performance</a></li><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/working_with_lifecycle">Working with Lifecycle</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Blueprints</h3><ul class=""><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/creating_project_from_blueprint">Creating Project from Blueprint</a></li><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/loading_data">Loading Data to Project</a></li><li class="navListItem"><a class="navItem" href="/gooddata-ruby-doc/docs/advanced_blueprint_examples">Advanced Blueprint Examples</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Working with Data Sources</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="creating-a-data-source"></a><a href="#creating-a-data-source" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creating a Data Source</h2>
+<p>Create a Snowflake Data Source programmatically:</p>
+<pre><code class="hljs css language-ruby"><span class="hljs-comment"># encoding: utf-8</span>
+
+<span class="hljs-keyword">require</span> <span class="hljs-string">'gooddata'</span>
+
+snowflake_ds_model = {
+          <span class="hljs-string">'dataSource'</span> =&gt; {
+              <span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'My Data Source'</span>,
+              <span class="hljs-string">'alias'</span> =&gt; <span class="hljs-string">'ds_alias'</span>,
+              <span class="hljs-string">'prefix'</span> =&gt; <span class="hljs-string">'ds_prefix_'</span>,
+              <span class="hljs-string">'connectionInfo'</span> =&gt; {
+                  <span class="hljs-string">'snowflake'</span> =&gt; {
+                      <span class="hljs-string">'url'</span> =&gt; <span class="hljs-string">'jdbc:snowflake://test'</span>,
+                      <span class="hljs-string">'authentication'</span> =&gt; {
+                          <span class="hljs-string">'basic'</span> =&gt; {
+                              <span class="hljs-string">'userName'</span> =&gt; <span class="hljs-string">'testing_user'</span>,
+                              <span class="hljs-string">'password'</span> =&gt; <span class="hljs-string">'***'</span>
+                          }
+                      },
+                      <span class="hljs-string">'database'</span> =&gt; <span class="hljs-string">'db_test'</span>,
+                      <span class="hljs-string">'schema'</span> =&gt; <span class="hljs-string">'schema_test'</span>,
+                      <span class="hljs-string">'warehouse'</span> =&gt; <span class="hljs-string">'wh_test'</span>
+                  }
+              }
+          }
+      }
+client = GoodData.connect
+snowflake_ds = client.create(GoodData::DataSource, snowflake_ds_model)
+snowflake_ds.save
+
+<span class="hljs-comment"># After the Data Source is created, you can start working with it</span>
+<span class="hljs-comment"># Using the Snowflake Data Source as source input in a process</span>
+project_test = client.projects(<span class="hljs-string">'project_pid_testing'</span>)
+process_test = project_test.deploy_process({
+          <span class="hljs-symbol">name:</span> <span class="hljs-string">'Testing Process'</span>,
+          <span class="hljs-symbol">type:</span> <span class="hljs-string">'LCM'</span>,
+          <span class="hljs-symbol">component:</span> {
+              <span class="hljs-symbol">name:</span> <span class="hljs-string">'gdc-cm-bricks'</span>,
+              <span class="hljs-symbol">version:</span> <span class="hljs-string">'1'</span>
+          },
+          <span class="hljs-symbol">dataSources:</span>[{<span class="hljs-symbol">id:</span> <span class="hljs-string">"<span class="hljs-subst">#{snowflake_ds.id}</span>"</span>}]
+      })
+<span class="hljs-comment"># Using the schema, database and password of a Snowflake Data Source as values of a schedule's parameters</span>
+schedule_test = process_test.create_schedule(
+          <span class="hljs-string">'0 15 10 3 *'</span>,
+          <span class="hljs-string">'Testing Schedule'</span>,
+          <span class="hljs-symbol">params:</span> {
+              <span class="hljs-symbol">username:</span> <span class="hljs-string">'test_us'</span>,
+              <span class="hljs-symbol">database:</span> <span class="hljs-string">'${ds_alias.database}'</span>,
+              <span class="hljs-symbol">schema:</span> <span class="hljs-string">'${ds_alias.schema}'</span>
+          },
+          <span class="hljs-symbol">hidden_params:</span> {
+              <span class="hljs-symbol">db_pass:</span> <span class="hljs-string">'${ds_alias.password}'</span>
+          }
+      )
+</code></pre>
+<p>Create an Amazon Redshift Data Source:</p>
+<pre><code class="hljs css language-ruby"><span class="hljs-comment"># encoding: utf-8</span>
+
+<span class="hljs-keyword">require</span> <span class="hljs-string">'gooddata'</span>
+
+<span class="hljs-comment"># Creating an Amazon Redshift Data Source with basic authentication</span>
+redshift_ds_model = {
+            <span class="hljs-string">'dataSource'</span> =&gt; {
+                <span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'My Data Source'</span>,
+                <span class="hljs-string">'alias'</span> =&gt; <span class="hljs-string">'ds_alias'</span>,
+                <span class="hljs-string">'prefix'</span> =&gt; <span class="hljs-string">'ds_prefix_'</span>,
+                <span class="hljs-string">'connectionInfo'</span> =&gt; {
+                    <span class="hljs-string">'redshift'</span> =&gt; {
+                        <span class="hljs-string">'url'</span> =&gt; <span class="hljs-string">'jdbc:redshift://test'</span>,
+                        <span class="hljs-string">'authentication'</span> =&gt; {
+                            <span class="hljs-string">'basic'</span> =&gt; {
+                                <span class="hljs-string">'userName'</span> =&gt; <span class="hljs-string">'testing_user'</span>,
+                                <span class="hljs-string">'password'</span> =&gt; <span class="hljs-string">'***'</span>
+                            }
+                        },
+                        <span class="hljs-string">'database'</span> =&gt; <span class="hljs-string">'db_test'</span>,
+                        <span class="hljs-string">'schema'</span> =&gt; <span class="hljs-string">'schema_test'</span>
+                    }
+                }
+            }
+        }
+client = GoodData.connect
+redshift_ds = client.create(GoodData::DataSource, redshift_ds_model)
+redshift_ds.save
+
+<span class="hljs-comment"># Creating an Amazon Redshift Data Source with access key and secret key authentication</span>
+redshift_iam_auth_model = {
+            <span class="hljs-string">'dataSource'</span> =&gt; {
+                <span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'RedshiftDS_IAM'</span>,
+                <span class="hljs-string">'alias'</span> =&gt; GoodData::Rest::Connection.generate_string,
+                <span class="hljs-string">'prefix'</span> =&gt; <span class="hljs-string">'prefix_'</span>,
+                <span class="hljs-string">'connectionInfo'</span> =&gt; {
+                    <span class="hljs-string">'redshift'</span> =&gt; {
+                        <span class="hljs-string">'url'</span> =&gt; <span class="hljs-string">'jdbc:redshift://test'</span>,
+                        <span class="hljs-string">'authentication'</span> =&gt; {
+                            <span class="hljs-string">'iam'</span> =&gt; {
+                                <span class="hljs-string">'dbUser'</span> =&gt; <span class="hljs-string">'user_iam_test'</span>,
+                                <span class="hljs-string">'accessKeyId'</span> =&gt; <span class="hljs-string">'OWIUEWQIO723628'</span>,
+                                <span class="hljs-string">'secretAccessKey'</span> =&gt; <span class="hljs-string">'abc123'</span>
+                            }
+                        },
+                        <span class="hljs-string">'database'</span> =&gt; <span class="hljs-string">'database_test'</span>,
+                        <span class="hljs-string">'schema'</span> =&gt; <span class="hljs-string">'schema_test'</span>
+                    }
+                }
+            }
+        }
+client = GoodData.connect
+redshift_iam_auth_ds = client.create(GoodData::DataSource, redshift_iam_auth_model)
+redshift_iam_auth_ds.save
+</code></pre>
+<p>Create a Google BigQuery Data Source:</p>
+<pre><code class="hljs css language-ruby"><span class="hljs-comment"># encoding: utf-8</span>
+
+<span class="hljs-keyword">require</span> <span class="hljs-string">'gooddata'</span>
+
+bigquery_ds_model = {
+          <span class="hljs-string">'dataSource'</span> =&gt; {
+              <span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'My Data Source'</span>,
+              <span class="hljs-string">'alias'</span> =&gt; <span class="hljs-string">'ds_alias'</span>,
+              <span class="hljs-string">'prefix'</span> =&gt; <span class="hljs-string">'ds_prefix_'</span>,
+              <span class="hljs-string">'connectionInfo'</span> =&gt; {
+                  <span class="hljs-string">'bigQuery'</span> =&gt; {
+                      <span class="hljs-string">'authentication'</span> =&gt; {
+                          <span class="hljs-string">'serviceAccount'</span> =&gt; {
+                              <span class="hljs-string">'clientEmail'</span> =&gt; <span class="hljs-string">'test@abc.com'</span>,
+                              <span class="hljs-string">'privateKey'</span> =&gt; <span class="hljs-string">'***'</span>
+                          }
+                      },
+                      <span class="hljs-string">'project'</span> =&gt; <span class="hljs-string">'project_test'</span>,
+                      <span class="hljs-string">'schema'</span> =&gt; <span class="hljs-string">'schema_test'</span>
+                  }
+              }
+          }
+      }
+client = GoodData.connect
+bigquery_ds = client.create(GoodData::DataSource, bigquery_ds_model)
+bigquery_ds.save
+</code></pre>
+<p>We also support Data Sources for Amazon S3, Agile Data Warehouse Service (ADS) and arbitrary (generic) locations.</p>
+<h2><a class="anchor" aria-hidden="true" id="renaming-a-data-source"></a><a href="#renaming-a-data-source" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Renaming a Data Source</h2>
+<pre><code class="hljs css language-ruby"><span class="hljs-keyword">require</span> <span class="hljs-string">'gooddata'</span>
+
+GoodData.connect
+ds = GoodData::DataSource.from_id(<span class="hljs-string">'datasource_id'</span>)
+ds.name = <span class="hljs-string">"New data source name"</span>
+ds.save
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="getting-a-data-source-by-its-id-or-alias"></a><a href="#getting-a-data-source-by-its-id-or-alias" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Getting a Data Source by its ID or alias</h2>
+<pre><code class="hljs css language-ruby"><span class="hljs-comment"># encoding: utf-8</span>
+
+<span class="hljs-keyword">require</span> <span class="hljs-string">'gooddata'</span>
+
+GoodData.connect
+ds_from_id = GoodData::DataSource.from_id(<span class="hljs-string">'datasource_id'</span>)
+ds_from_alias = GoodData::DataSource.from_alias(<span class="hljs-string">'datasource_alias'</span>)
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="getting-all-data-sources"></a><a href="#getting-all-data-sources" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Getting all Data Sources</h2>
+<pre><code class="hljs css language-ruby"><span class="hljs-comment"># encoding: utf-8</span>
+
+<span class="hljs-keyword">require</span> <span class="hljs-string">'gooddata'</span>
+
+GoodData.connect
+ds_list = GoodData::DataSource.all
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="deleting-a-data-source"></a><a href="#deleting-a-data-source" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deleting a Data Source</h2>
+<pre><code class="hljs css language-ruby"><span class="hljs-comment"># encoding: utf-8</span>
+
+<span class="hljs-keyword">require</span> <span class="hljs-string">'gooddata'</span>
+
+GoodData.connect
+ds_from_id = GoodData::DataSource.from_id(<span class="hljs-string">'datasource_id'</span>)
+ds_from_alias = GoodData::DataSource.from_alias(<span class="hljs-string">'datasource_alias'</span>)
+
+ds_from_id.delete
+ds_from_alias.delete
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/gooddata-ruby-doc/docs/working_with_users"><span class="arrow-prev">← </span><span>Working with Users</span></a><a class="docs-next button" href="/gooddata-ruby-doc/docs/working_with_permissions"><span>Setting Permissions</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#creating-a-data-source">Creating a Data Source</a></li><li><a href="#renaming-a-data-source">Renaming a Data Source</a></li><li><a href="#getting-a-data-source-by-its-id-or-alias">Getting a Data Source by its ID or alias</a></li><li><a href="#getting-all-data-sources">Getting all Data Sources</a></li><li><a href="#deleting-a-data-source">Deleting a Data Source</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2007–2018 GoodData Corporation. All Rights Reserved. Code licensed under an <a href="https://github.com/gooddata/gooddata-ruby/blob/master/LICENSE">BSD License</a>.</section></footer></div></body></html>
